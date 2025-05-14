@@ -5,6 +5,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class FuncionariosService {
   constructor(private prisma: PrismaService) {}
 
+  // Função para criar um novo funcionário
   async criarFuncionario(data: {
     nome: string;
     cpf: string;
@@ -16,5 +17,10 @@ export class FuncionariosService {
     return this.prisma.funcionario.create({
       data,
     });
+  }
+
+  // Função para listar todos os funcionários
+  async listarFuncionarios() {
+    return this.prisma.funcionario.findMany(); // Retorna todos os funcionários
   }
 }
