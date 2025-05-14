@@ -6,10 +6,21 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "./node_modules/@prisma/client"  // Especifica o diretório de saída
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Funcionario {
+  id               String   @id @default(uuid())
+  nome             String
+  cpf              String   @unique
+  pis              String
+  matricula        String   @unique
+  dataNascimento   DateTime
+  dataAdmissao     DateTime
+  createdAt        DateTime @default(now())
 }

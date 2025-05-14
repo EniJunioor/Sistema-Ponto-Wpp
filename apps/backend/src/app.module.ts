@@ -1,12 +1,21 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config'; // importa o ConfigModule
+import { PrismaModule } from './prisma/prisma.module'; // importa o PrismaModule
+import databaseConfig from './config/database.config'; // importa a config do banco
+
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppService } from './app.service'; 
 
-// ✅ Corrigir este caminho conforme sua estrutura
-import { AuthModule } from './modules/auth/auth.module';
-
+import { FuncionariosModule } from './modules/funcionarios/funcionarios.module'; // importa o Funcionario
 @Module({
-  imports: [AuthModule], // <-- importa o módulo aqui
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [databaseConfig],
+    }),
+    PrismaModule,
+    FuncionariosModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
