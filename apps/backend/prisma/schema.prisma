@@ -23,4 +23,5 @@ model Funcionario {
   dataNascimento   DateTime
   dataAdmissao     DateTime
   createdAt        DateTime @default(now())
+  
 }
